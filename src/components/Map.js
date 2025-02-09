@@ -23,12 +23,12 @@ const MapComponent = ({ onCountrySelect, hideCapital }) => {
         const loadData = async () => {
             try {
                 // Load capitals data
-                const capitalsResponse = await fetch("/countries_capitals_flags.json");
+                const capitalsResponse = await fetch(`${process.env.PUBLIC_URL}/countries_capitals_flags.json`);
                 const capitals = await capitalsResponse.json();
                 setCapitalsData(capitals);
 
                 // Load GeoJSON data
-                const geoResponse = await fetch("/countries.geojson");
+                const geoResponse = await fetch(`${process.env.PUBLIC_URL}/countries.geojson`);
                 const geoData = await geoResponse.json();
                 const geoJSONFormat = new GeoJSON();
                 const vectorLayer = new VectorLayer({

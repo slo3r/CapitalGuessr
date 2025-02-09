@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const capitalsResponse = await fetch("/countries_capitals_flags.json");
+      const capitalsResponse = await fetch(`${process.env.PUBLIC_URL}/countries_capitals_flags.json`);
       const capitals = await capitalsResponse.json();
       setCapitalsData(capitals);
     };
