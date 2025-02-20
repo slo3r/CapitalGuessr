@@ -155,6 +155,10 @@
         "capital": "Ottawa",
         "flag": "CA"
     },
+    "Cayman Islands": {
+        "capital": "George Town",
+        "flag": "KY"
+    },
     "Central African Republic": {
         "capital": "Bangui",
         "flag": "CF"
@@ -198,6 +202,10 @@
     "Côte d'Ivoire": {
         "capital": "Yamoussoukro",
         "flag": "CI"
+    },
+    "Cook Islands": {
+        "capital": "Avarua",
+        "flag": "CK"
     },
     "Croatia": {
         "capital": "Zagreb",
@@ -583,12 +591,16 @@
         "capital": "Alofi",
         "flag": "NU"
     },
+    "Norfolk Island": {
+        "capital": "Kingston",
+        "flag": "NF"
+    },
     "North Macedonia": {
         "capital": "Skopje",
         "flag": "MK"
     },
     "Northern Cyprus": {
-        "capital": "Nicosia",
+        "capital": "Northern Nicosia",
         "flag": "CY"
     },
     "Norway": {
@@ -643,6 +655,10 @@
         "capital": "San Juan",
         "flag": "PR"
     },
+    "Pitcairn Islands": {
+        "capital": "Adamstown",
+        "flag": "PN"
+    },
     "Qatar": {
         "capital": "Doha",
         "flag": "QA"
@@ -682,6 +698,10 @@
     "Saint Martin": {
         "capital": "Marigot",
         "flag": "MF"
+    },
+    "Saint Pierre and Miquelon": {
+        "capital": "Saint-Pierre",
+        "flag": "PM"
     },
     "Samoa": {
         "capital": "Apia",
@@ -823,6 +843,10 @@
         "capital": "Ashgabat",
         "flag": "TM"
     },
+    "Turks and Caicos Islands": {
+        "capital": "Cockburn Town",
+        "flag": "TC"
+    },
     "Tuvalu": {
         "capital": "Funafuti",
         "flag": "TV"
@@ -846,6 +870,10 @@
     "United States of America": {
         "capital": "Washington, D.C.",
         "flag": "US"
+    },
+    "United States Minor Outlying Islands": {
+        "capital": "None",
+        "flag": "UM"
     },
     "Uruguay": {
         "capital": "Montevideo",
@@ -874,6 +902,10 @@
     "Virgin Islands": {
         "capital": "Charlotte Amalie",
         "flag": "VI"
+    },
+    "Wallis and Futuna": {
+        "capital": "Mata-Utu",
+        "flag": "WF"
     },
     "Western Sahara": {
         "capital": "El Aaiún",

@@ -4,12 +4,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
     "cra-template": "1.2.0",
+    "express": "^4.21.2",
     "ol": "^10.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^4.2.4",
+    "ws": "^8.18.0"
   },
   "scripts": {
     "start": "react-scripts start",

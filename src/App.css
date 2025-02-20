@@ -32,18 +32,21 @@ html, body, #root {
   display: flex;
   flex-direction: column;   
   align-items: center;
-  width: 60%;
+  justify-content: center;
+  width: 100%;
   height: 100%;
 }
 .info-panel-guesses{
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .guesses-list {
   margin-bottom: 10px;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  width: 60%;
 }
 .guess{
   margin: auto;
@@ -178,4 +181,42 @@ html, body, #root {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 5px;
+}
+.score-panel{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+.score-info{
+  display: flex;
+}
+.score{
+  margin-left: 3px;
+}
+.lobby-buttons{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.lobby-buttons button{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.multiplayer-lobby{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+hr{
+  width: 80%;
 }
