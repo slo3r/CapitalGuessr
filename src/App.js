@@ -125,16 +125,7 @@ function App() {
   // multiplayer
   // Multiplayer WebSocket setup
   useEffect(() => {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    let socketUrl;
-
-    if (process.env.NODE_ENV === 'production') {
-      // For production: same host but WebSocket protocol
-      socketUrl = `${protocol}//${window.location.host}`;
-    } else {
-      // For development: use local WebSocket server
-      socketUrl = process.env.REACT_APP_WS_URL || "ws://localhost:3001";
-    }
+    let socketUrl = "wss://capitalguessr-927319661404.europe-central2.run.app";
 
     console.log("Connecting to WebSocket at:", socketUrl);
     const socket = new WebSocket(socketUrl);
