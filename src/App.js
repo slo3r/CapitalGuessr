@@ -125,52 +125,72 @@ function App() {
   // multiplayer
   // Multiplayer WebSocket setup
   useEffect(() => {
-    const socketUrl = process.env.REACT_APP_WS_URL || "ws://localhost:3001";
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    let socketUrl;
+
+    if (process.env.NODE_ENV === 'production') {
+      // For production: same host but WebSocket protocol
+      socketUrl = `${protocol}//${window.location.host}`;
+    } else {
+      // For development: use local WebSocket server
+      socketUrl = process.env.REACT_APP_WS_URL || "ws://localhost:3001";
+    }
+
+    console.log("Connecting to WebSocket at:", socketUrl);
     const socket = new WebSocket(socketUrl);
 
     socket.onopen = () => console.log("Connected to WebSocket server");
+    socket.onerror = (error) => console.error("WebSocket error:", error);
 
     socket.onmessage = (message) => {
-      const data = JSON.parse(message.data);
-      console.log("Message from server:", data);
+      try {
+        const data = JSON.parse(message.data);
+        console.log("Message from server:", data);
 
-      if (data.type === 'lobbyCreated') {
-        setLobbyId(data.lobbyId);
-        setPlayerRole("host");
-      } else if (data.type === 'newRound') {
-        setCurrentCapital(data.capital);
-        setCurrentCountry(data.country);
-        console.log("New round data:", data);
-        setHideCapital(true);
-        setGameState("multiInGame");
-        setGuesses([]);
-        setOpponentGuesses([]);
-        setRound(prev => prev + 1);
-        setShowNextButton(false);
-        setShowAnswer(false);
-        setOpponentCorrect(false);
-      } else if (data.type === 'opponentGuess') {
-        if (data.correct) {
-          setOpponentScore(prev => prev + 1);
-          setOpponentCorrect(true);
-        } else {
-          setOpponentGuesses(prev => [...prev, data.guessedCountry]);
+        if (data.type === 'lobbyCreated') {
+          setLobbyId(data.lobbyId);
+          setPlayerRole("host");
+        } else if (data.type === 'newRound') {
+          setCurrentCapital(data.capital);
+          setCurrentCountry(data.country);
+          console.log("New round data:", data);
+          setHideCapital(true);
+          setGameState("multiInGame");
+          setGuesses([]);
+          setOpponentGuesses([]);
+          setRound(prev => prev + 1);
+          setShowNextButton(false);
+          setShowAnswer(false);
+          setOpponentCorrect(false);
+        } else if (data.type === 'opponentGuess') {
+          if (data.correct) {
+            setOpponentScore(prev => prev + 1);
+            setOpponentCorrect(true);
+          } else {
+            setOpponentGuesses(prev => [...prev, data.guessedCountry]);
+          }
+        } else if (data.type === 'nextRoundAvailable') {
+          setShowNextButton(true);
+        } else if (data.type === 'lobbyError') {
+          alert(data.message);
+        } else if (data.type === 'opponentDisconnected') {
+          alert("Opponent disconnected");
+          setGameState('menu');
+          setLobbyId(null);
+          setPlayerRole(null);
         }
-      } else if (data.type === 'nextRoundAvailable') {
-        setShowNextButton(true);
-      } else if (data.type === 'lobbyError') {
-        alert(data.message);
-      } else if (data.type === 'opponentDisconnected') {
-        alert("Opponent disconnected");
-        setGameState('menu');
-        setLobbyId(null);
-        setPlayerRole(null);
+      } catch (error) {
+        console.error("Error processing WebSocket message:", error);
       }
     };
 
     setWs(socket);
 
-    return () => socket.close();
+    return () => {
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.close();
+      }
+    };
   }, []);
 
 
