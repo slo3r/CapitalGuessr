@@ -3,7 +3,9 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
 
-const wss = new WebSocket.Server({ port: 3001 });
+const port = process.env.PORT || 3001;
+const wss = new WebSocket.Server({ port });
+
 
 let lobbies = {}; // Stores lobbies { lobbyId: { players: [], capital, currentRound, readyPlayers } }
 
@@ -89,15 +91,17 @@ function startRound(lobby) {
     lobby.capital = capitalsData[randomCountry].capital;
     console.log("Starting round with capital:", lobby.capital);
 
-    
+
     lobby.players.forEach(player => {
         player.send(JSON.stringify({
             type: 'newRound',
             capital: lobby.capital,
             country: randomCountry,
-            
+
         }));
     });
 }
 
-console.log("WebSocket server running on ws://localhost:3001");
+app.listen(port, '0.0.0.0', () => {
+    console.log(`App listening on port ${port}`);
+});
