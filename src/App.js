@@ -125,13 +125,14 @@ function App() {
   // multiplayer
   // Multiplayer WebSocket setup
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:3001");
+    const socketUrl = process.env.REACT_APP_WS_URL || "ws://localhost:3001";
+    const socket = new WebSocket(socketUrl);
+
     socket.onopen = () => console.log("Connected to WebSocket server");
+
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
       console.log("Message from server:", data);
-
-      
 
       if (data.type === 'lobbyCreated') {
         setLobbyId(data.lobbyId);
@@ -140,7 +141,6 @@ function App() {
         setCurrentCapital(data.capital);
         setCurrentCountry(data.country);
         console.log("New round data:", data);
-        console.log("Current country:", data.country);
         setHideCapital(true);
         setGameState("multiInGame");
         setGuesses([]);
@@ -166,11 +166,13 @@ function App() {
         setLobbyId(null);
         setPlayerRole(null);
       }
-      
     };
+
     setWs(socket);
+
     return () => socket.close();
   }, []);
+
 
   // Multiplayer guess handler
   const handleGuessMulti = (guessedCountry) => {
